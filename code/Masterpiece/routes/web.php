@@ -16,8 +16,9 @@ use App\City;
 |
 */
 
+Route::resource('/dashboard', 'dashboardController')->middleware('auth:admin');
 
-Route::get('/admin/editadmin/{id}/editadmin', "adminController@edit");
+Route::get('/admin/editadmin/{id}', "adminController@edit");
 Route::put('/admin/updateadmin/{id}', 'adminController@update');
 Route::get('/admin/delateadmin/{id}', 'adminController@destroy');
 
@@ -26,6 +27,11 @@ Route::resource('/Category', 'CategoryController')->middleware('auth:admin');
 Route::get('/editcategory/{id}','CategoryController@edit');
 Route::put('/updatecategory/{id}', 'CategoryController@update');
 Route::get('/deletecategory/{id}', 'CategoryController@destroy');
+
+
+Route::resource('/City', 'cityController')->middleware('auth:admin');
+Route::get('/deletecity/{id}', 'cityController@destroy');
+
 
 
 
@@ -44,6 +50,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('', 'HomeController@getCategoryProducts')->name('category.product');
 Route::get('/category/products/{category_id}','HomeController@getCategoryProducts')->name('category.product');
 Route::get('/search', 'uploadItemController@search')->name('search');
+Route::get('/searchuser', 'userController@search')->name('searchuser');
 // Route::get('/category/singleproducts/{product_id}','HomeController@show')->name('products.show');
 Route::get('/singleproduct/{id}', 'HomeController@show');
 
@@ -54,6 +61,9 @@ Route::post('/user/logout','Auth\LoginController@userLogout')->name('user.logout
 // Route::post('/user/logout', 'Auth\AdminLoginController@userLogout')->name('user.logout');
 Route::get('/admin','adminController@index')->middleware('auth:admin')->name('admin');
 Route::post('/admin','adminController@store');
+
+Route::get('/manageUser','userController@index');
+Route::get('deleteuser/{id}','userController@delete');
 
 Route::get('/admin/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
 Route::post('/admin/login','Auth\AdminLoginController@login')->name('admin.login.submit');
@@ -75,6 +85,7 @@ Route::get('/contact_Us',function(){
 });
 Route::post('/contact_Us','ContactUsController@store');
 Route::get('/contactUs','ContactUsController@index');
+Route::get('deletemessage/{id}','ContactUsController@delete');
 
 // Route::get('/help',function(){
 //     return view('public_side.help');
@@ -93,6 +104,8 @@ Route::get('/about_Us',function(){
 });
 
 //uploadItem page
+Route::get('deleteProduct/{id}','productController@destroy');
+
 Route::get('/upload_Item',function(){
 
    
@@ -152,7 +165,7 @@ Route::get('deleteproduct/{id}','profileController@destroy');
 Route::post('/add-to-cart','wishlistController@addToCart');
 
 Route::get('/add-to-wishlist','wishlistController@index');
-Route::get('/deletwishlist/{id}','wishlistController@destroy')->name('post.delete');
+Route::get('deletwishlist/{id}','wishlistController@delete');
 
 
 

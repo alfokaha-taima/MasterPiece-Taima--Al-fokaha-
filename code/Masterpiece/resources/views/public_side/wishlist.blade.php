@@ -1,120 +1,58 @@
-@extends('public_side.layout')
 
-@section('content')
-<div class="col-lg-12">
-    <div class="card">
-        <div class="card-header">Example Form</div>
-        {{-- <div class="card-body card-block">
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                @foreach ($errors->all() as $error)
-                <span>{{$error}}</span>
-                <br>
-                @endforeach
-            </div>
-            @endif
-            <form action="/Product" method="post" class="" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-user"></i>
-                        </div>
-                        <input type="text" id="username" name="name" placeholder="Product Name" class="form-control">
+            @extends('public_side.layout')
+            @section('content')
+            <style>
+                #more {display: none;}
+                </style>
+            <div class="col-lg-12">
+                <div class="card">
+                    @csrf
+                    @if(session('success'))
+                    <div class="alert alert-success" role="alert">
+                        {{session('success')}}
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-envelope"></i>
-                        </div>
-                        <input type="number" id="price" name="price" placeholder="price" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-asterisk"></i>
-                        </div>
-                        <input type="desc" id="password" name="desc" placeholder="Descreption" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-align-justify" aria-hidden="true"></i>
-                        </div>
-                        <select type="text" name="category_id" placeholder="Category" class="form-control">
-                            @foreach( $categories as $cat)
-                            <option value="{{$cat['id']}}"> {{$cat['name']}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-envelope"></i>
-                        </div>
-                        <input type="file"  name="image" placeholder="upload your image" class="form-control">
-                    </div>
-                </div>
-                <div class="form-actions form-group">
-                    <button type="submit" class="btn btn-primary  btn-sm">Submit</button>
-                </div>
-                
-            </form>
-        </div> --}}
- 
-    </div>
- <!-- table  start -->
-    <div class="clearfix mb-20">
-        <div class="pull-left">
-            <h4 class="text-blue h4">Admins table</h4>
-        </div>
-    </div>
-    <div class="col-lg-12" style="overflow-x:auto;">
-      <table class="table table-bordered" >
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">title</th>
-                <th scope="col">Price</th>
-                <th scope="col">Descreption</th>
-                
-  
-                <th scope="col">Image</th>
-              
-                <th scope="col">Delete</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-           @forelse ($products as $value)
-           <tr>
-               <td>{{$value->id}}</td>
-               <td>{{$value->title}}</td>
-               <td>{{$value->price}} JD</td>
-               <td>{{$value->desc}}</td>
-              
-                    <td><img width="70px" src="/images/{{$value->image}}"></td>
-              
-                  
-                        <td><a class="btn-sm btn-danger" type="submit" href="/deletwishlist/{{$value->id}}" role="button">Delete</a></td>
-                      {{-- <td>  <a href="{{ route('post.delete',['id' => $value->id]) }}" class="btn btn-danger">Trash</a></td> --}}
- 
+                    @endif
+             
+                 
+            <h2 style="text-align: center;">Your Wish List</h2>
             
-           
-            </tr>
+            <div class="row"  >
                
-           @empty
-             <h4>No Prduct</h4>  
-           @endforelse
-        </tbody>
-      </table>
-    </div>
+              @if($products->isNotEmpty())
+                @forelse ($products as $value)
+                <div  class="col-lg-2">
+                <div class="card"   style="box-shadow: rgba(226, 28, 28, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;width: 18rem;">
+                    <img  class="card-img-top" style="padding:1rem;width:18rem;height:15rem" src="/images/{{$value->image}}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title text-center">{{$value->title}}</h5>
+                      <h5 class="card-title text-center">{{$value->price}} JD</h5>
+                     
+                      <div class="row">
+                        <div class="col text-center">
+                          <a style="margin: 10px" class="btn btn-danger" href='deletwishlist/{{$value->wishlist_id}}'><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </div>
+                      </div>
+                   
+                     
+                  
+            </div>
+            </div>
+            </div>
+            @empty
+            <h4>No Prduct</h4>  
+            @endforelse
+            @else 
+<div>
+    <h3 class="text-center">Not Found</h3>
 </div>
+@endif
+                </div>
+                </div>
+            </div>
+           
+            
+            @endsection
+            
+          
 
-<!--table End -->
 
-@endsection

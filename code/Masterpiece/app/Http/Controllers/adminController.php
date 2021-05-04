@@ -15,7 +15,7 @@ class adminController extends Controller
     public function index()
     {
         $admin = Admin::all();
-        return view('dashboard.Admin', compact('admin'));
+        return view('dashboard.admin', compact('admin'));
     }
     
     
@@ -76,7 +76,7 @@ class adminController extends Controller
         $var->password = Hash::make($request->get('password'));
         $var->image = $imageName;
         $var->save();
-        return redirect('Admin')->with('success', 'Contact updated!');
+        return redirect('admin')->with('success', 'Contact updated!');
     }
 
     public function destroy($id)

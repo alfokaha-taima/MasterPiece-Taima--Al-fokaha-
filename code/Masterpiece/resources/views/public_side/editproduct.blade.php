@@ -1,10 +1,26 @@
 @extends('public_side.layout')
 
 @section('content')
-<div class="col-lg-13">
-    <div class="card">
-        <div class="card-header">Example Form</div>
-        <div class="card-body card-block">
+<style>
+    .select {
+  width: 100%;
+  min-width: 100%;
+  max-width: 50ch;
+  border: 1px solid rgb(169, 159, 159);
+  
+  padding: 0.25em 0.5em;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  
+}
+
+    </style>
+<div class="login-page"  >
+    <div class="container"> 
+        <h3 class="w3ls-title w3ls-title1">Update Your Product</h3><div class="login-body">
             @if ($errors->any())
             <div class="alert alert-danger">
                 @foreach ($errors->all() as $error)
@@ -14,75 +30,71 @@
             </div>
             @endif
             <form action="/updateproduct/{{$products['id']}}" method="post" class="" enctype="multipart/form-data">
+                <input type="hidden" value="{{Session::token()}}" name="_token">
+
                 @csrf
                 @method('PUT')
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-user"></i>
-                        </div>
-                        <input type="text" id="username" name="title" placeholder="Product Name" class="form-control" value="{{$products['title']}}">
-                    </div>
+
+                @if(session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{session('success')}}
                 </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-envelope"></i>
-                        </div>
-                        <input type="number" id="price" name="price" placeholder="price" class="form-control" value="{{$products['price']}}">
-                    </div>
+                @endif
+               
+                            
+                      
+                        <div class="form-group">
+                            <input type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="Product Name" value="{{$products['title']}}">
+                          </div>
+                          <div class="form-group">
+                          <input type="text" id="price" class="form-control"  name="price" placeholder="price" value="{{$products['price']}}" >
+                         </div>
+             
+
+                         <div class="form-group">
+                    <select type="text" name="city_id" class="form-control" placeholder="City" class="form-control">
+                        @foreach( $cities as $city)
+                        <option value="{{$city['id']}}"> {{$city['city_name']}}</option>
+                        @endforeach
+                    </select>
                 </div>
+          
                 <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-asterisk"></i>
-                        </div>
-                        <input type="text" id="password" name="desc" placeholder="Descreption" class="form-control" value="{{$products['desc']}}">
+                        <input type="text" class="form-control" id="password" name="desc" placeholder="Descreption" class="form-control" value="{{$products['desc']}}">
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-align-justify" aria-hidden="true"></i>
-                        </div>
-                        <select type="text" name="category_id" placeholder="Category" class="form-control">
-                            @foreach($categories as $cat)
+  
+                    <div class="form-group">
+
+                        <select type="text" class="form-control" name="category_id" placeholder="Category" class="select">
+                            @foreach( $categories as $cat)
                             <option value="{{$cat['id']}}"> {{$cat['name']}}</option>
                             @endforeach
                         </select>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-align-justify" aria-hidden="true"></i>
-                        </div>
-                        <select type="text" name="city_id" placeholder="Category" class="form-control">
-                            @foreach($cities as $city)
-                            <option value="{{$city['id']}}"> {{$city['city_name']}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-envelope"></i>
-                        </div>
-                        <input type="file"  name="image" placeholder="upload your image" class="form-control">
-                    </div>
-                </div>
-                <div class="form-actions form-group">
-                    <button type="submit" class="btn btn-primary  btn-sm">Submit</button>
-                </div>
+
                 
+                    <div class="form-group">
+                        <input type="file" class="form-control" name="image" placeholder="upload your image" class="form-control">
+                    </div>
+
+            
+                        @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                    <div class="form-group">
+                        <input type="text"  class="form-control" name="name" placeholder="Owner Name" class="form-control" value=" {{  Auth::user()->name}}" readonly>
+                    </div>
+              
+                        <input type="text" name="mobile" placeholder="Owner Number" class="form-control" value=" {{ Auth::user()->mobile }}" readonly>
+                 
+               
+                <div class="form-actions form-group">
+                    <input type="submit" value="Submit"> </div>
+                </div>
             </form>
-        </div>
- 
-</div>
- <!-- table  start -->
-
-</div>
-<!--table End -->
-
-@endsection
+       
+    </div>
+    </div>
+    @endsection

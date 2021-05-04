@@ -1,6 +1,6 @@
 @extends('dashboard.layout')
 @section('content')
-<div class="col-lg-13">
+<div class="col-lg-12">
     <div class="card">
         <div class="card-header">Example Form</div>
         <div class="card-body card-block">
@@ -17,7 +17,6 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">
-                            <i class="fa fa-user"></i>
                         </div>
                         <input type="text" id="username" name="name" placeholder="Username" class="form-control">
                     </div>
@@ -25,7 +24,6 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">
-                            <i class="fa fa-envelope"></i>
                         </div>
                         <input type="text" id="email" name="desc" placeholder="Descreption" class="form-control">
                     </div>
@@ -34,7 +32,6 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">
-                            <i class="fa fa-envelope"></i>
                         </div>
                         <input type="file"  name="image" placeholder="upload your image" class="form-control">
                     </div>
@@ -47,42 +44,34 @@
         </div>
  
 </div>
- <!-- table  start -->
- <div class="pd-20 card-box mb-30">
-    <div class="clearfix mb-20">
-        <div class="pull-left">
-            <h4 class="text-blue h4">Category table</h4>
+
+
+<div class="row"  style="padding: 2rem;">
+   
+
+    @foreach ($category as $value)
+    <div  class="col-lg-4">
+    <div class="card"   style="box-shadow: rgba(226, 28, 28, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;width: 18rem;">
+        <img  class="card-img-top" style="padding:1rem;width:18rem;height:15rem" src="/images/{{$value['image']}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{$value['name']}}</h5>
+          <h5 class="card-title">{{$value['desc']}}</h5>
+          
+          
+        <div class="row">
+          <td><a   href="editcategory/{{$value['id']}}"  class='btn btn-primary'>Edit</a></td>
+          <td><a  href="deletecategory/{{$value['id']}}"  class='btn btn-danger'>Delete</a></td>
+        
         </div>
-    </div>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">image</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-          @foreach ($category as $value)
-                <tr>
-                    <td scope="row">{{$value['id']}}</td> 
-                     <td>{{$value['name']}}</td> 
-                    <td>{{$value['desc']}}</td>
-                    <td>  <img width="70px" src="/images/{{$value['image']}}"></td>
-                  
-                     <td>
-                        <a class="btn-sm btn-warning" href="editcategory/{{$value['id']}}" role="button"> Edit </a>
-                    </td> 
-                    <td><a class="btn-sm btn-danger" href="deletecategory/{{$value['id']}}" role="button">Delete</a></td> 
-                </tr>
-             @endforeach 
-        </tbody>
-    </table>
+        </div>
+  
+{{-- <div>{!! $package->package_validity !!}</div> --}}
+
+<div class="card-body" style="display: flex; flex-direction: row; margin-top: 1rem">
 </div>
 </div>
-<!--table End -->
+</div>
+
+@endforeach
 
 @endsection

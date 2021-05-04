@@ -28,7 +28,7 @@ class uploadItemController extends Controller
             $imageName = time() . '.' . request()->image->getClientOriginalExtension();
             request()->image->move(public_path('images'), $imageName);
         } else {
-            $imageName = 'default.png';
+            $imageName = 'default2.jpg';
         }
 
 
@@ -53,20 +53,7 @@ class uploadItemController extends Controller
     function approval(Request $req)
     {
 
-        // $validateData = $req->validate([
-        //     'name' => 'required|min:3|alpha_dash',
-        //     'price' => 'required',
-        //     'city' => 'required',
-        //     'desc' => 'required|min:8',
-        //     'category_id' => 'required',
-        //     'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
-        // if (!empty(request()->image)) {
-        //     $imageName = time() . '.' . request()->image->getClientOriginalExtension();
-        //     request()->image->move(public_path('images'), $imageName);
-        // } else {
-        //     $imageName = 'default.png';
-        // }
+     
 
 
         
@@ -80,13 +67,9 @@ class uploadItemController extends Controller
         }
         $product->approve=$approveVal;
         $product->save();
-        // $product->name     = $req['name'];
-        // $product->price   = $req['price'];
-        // $product->city   = $req['city'];
-        // $product->desc   = $req['desc'];
-        // $product->category_id = $req['category_id'];
-        // $product->image    = $imageName;
-        // $product->save();
+        $req->session()->flash('success','Approved Successfully');
+
+      
         return back();
 
     }
@@ -113,7 +96,7 @@ class uploadItemController extends Controller
             $imageName = time() . '.' . request()->image->getClientOriginalExtension();
             request()->image->move(public_path('images'), $imageName);
         } else {
-            $imageName = 'default.png';
+            $imageName = 'default2.jpg';
         }
         $var = Product::find($id);
         $var->name = $request->get('title');

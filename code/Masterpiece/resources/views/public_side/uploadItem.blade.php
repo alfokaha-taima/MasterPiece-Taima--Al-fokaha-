@@ -33,6 +33,7 @@
                 <input type="hidden" value="{{Session::token()}}" name="_token">
 
                 @csrf
+                
                 @if(session('success'))
                 <div class="alert alert-success" role="alert">
                     {{session('success')}}
@@ -42,7 +43,6 @@
                             
                       
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Email address</label>
                             <input type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="Product Name">
                           </div>
                           <div class="form-group">

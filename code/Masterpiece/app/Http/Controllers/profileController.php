@@ -63,7 +63,7 @@ class profileController extends Controller
       public function destroy($id){
           $var=Product::find($id);
           $var->delete();
-          return back()->with('success', 'User deleted!');
+          return back()->with('success', 'Product deleted!');
       }
 
      public function editprofile(){

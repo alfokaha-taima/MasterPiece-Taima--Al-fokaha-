@@ -54,31 +54,16 @@
     <div class="container"> 
         <div class="welcome-info">
             <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
-                {{-- <ul id="myTab" class=" nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" >
-                        <i class="fa fa-laptop" aria-hidden="true"></i> 
-                        <h5>Electronics</h5>
-                    </a></li>
-                    <li role="presentation"><a href="#carl" role="tab" id="carl-tab" data-toggle="tab"> 
-                        <i class="fa fa-female" aria-hidden="true"></i>
-                        <h5>Fashion</h5>
-                    </a></li>
-                    <li role="presentation"><a href="#james" role="tab" id="james-tab" data-toggle="tab"> 
-                        <i class="fa fa-gift" aria-hidden="true"></i>
-                        <h5>Photo & Gifts</h5>
-                    </a></li>
-                    <li role="presentation"><a href="#decor" role="tab" id="decor-tab" data-toggle="tab"> 
-                        <i class="fa fa-home" aria-hidden="true"></i>
-                        <h5>Home Decor</h5>
-                    </a></li>
-                    <li role="presentation"><a href="#sports" role="tab" id="sports-tab" data-toggle="tab"> 
-                        <i class="fa fa-motorcycle" aria-hidden="true"></i>
-                        <h5>Sports</h5>
-                    </a></li> 
-                </ul> --}}
+               
                 <div class="clearfix"> </div>
-                <h3 class="w3ls-title">Leates Products</h3>
+                <h3 class="w3ls-title text-center">Leates Products</h3>
                 <div id="myTabContent" class="tab-content">
+                    @csrf
+                    @if(session('success'))
+                    <div class="alert alert-success" role="alert">
+                        {{session('success')}}
+                    </div>
+                    @endif
                     <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
                         <div class="tabcontent-grids">  
                             <div id="owl-demo" class="owl-carousel"> 
@@ -86,18 +71,22 @@
                                 <div class="item">
                                     <div class="glry-w3agile-grids agileits"> 
                                         
-                                        <a href="singleproduct/{{$product['id']}}"><img src="images/{{$product['image']}}" alt="img"></a>
+                                        <a href="singleproduct/{{$product['id']}}"><img style="width: 18rem;height:20rem" src="images/{{$product['image']}}" alt="img"></a>
                                         <div class="view-caption agileits-w3layouts">           
                                             <h4><a href="singleproduct/{{$product['id']}}">{{$product['title']}}</a></h4>
                                             <p>{{Str::limit($product['desc'],15)}}</p>
                                             <h5>{{$product['price']}}jd</h5> 
-                                            <form action="singleproduct/{{$product['id']}}" method="post">
-                                                {{-- <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" /> 
-                                                <input type="hidden" name="w3ls_item" value="Audio speaker" /> 
-                                                <input type="hidden" name="amount" value="100.00" />  --}}
-                                                <button type="submit" class="w3ls-cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Vaforite</button>
-                                            </form>  
+                                           
+                                            <form action="/add-to-cart" method="POST">
+                                                @csrf
+                                                
+                                                <input type="hidden" name="product_id" value="{{$product['id']}}"/>
+                                           
+                                <a class="nav-link"  href="{{ route('login') }}">
+                                    <button type="submit" class="w3ls-cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Wishlist</button>
+ 
+                                </a>
+                                            </form>
                                         </div>   
                                     </div>   
                                 </div>
@@ -154,12 +143,12 @@
 <!-- deals -->
 <div class="deals"> 
     <div class="container"> 
-        <h3 class="w3ls-title">DEALS OF THE DAY </h3>
+        <h3 class="w3ls-title">Categories </h3>
         <div class="deals-row">
             @foreach ($categories as $category)
             <div class="col-md-3 focus-grid"> 
                 <a href="{{route("category.product",$category->id)}}" class="wthree-btn"> 
-                    <div class="focus-image"><img  style="width:20px;highet:20px" src="images/{{$category['image']}}"/> </div>
+                    <div class="focus-image"><img  style="width:40px;highet:40px" src="images/{{$category['image']}}"/> </div>
                     <h4 class="clrchg">{{$category['name']}}</h4> 
                 </a>
             </div>

@@ -1,13 +1,16 @@
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
+License: Creative Commons Attribution 3.0 Unportedf
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Smart Bazaar an E-commerce Online Shopping Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<title>YardSale</title>
+<link href="{{asset('images/aboutUss.png')}}" rel="icon">
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -39,14 +42,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 <style>
 
-.topnav {
+.topnav-t {
   overflow: hidden;
   background-color: #222;
 
 
 }
 
-.topnav a {
+.topnav-t a {
   float: left;
   display: block;
   color: #Fff;
@@ -56,48 +59,50 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
   font-size: 17px;
 }
 
-.topnav a:hover {
+.topnav-t a:hover {
   background-color: #F44336;
   color: white;
 }
 
-.topnav a.active {
+.topnav-t a.active {
   background-color: #4CAF50;
   color: white;
 }
 
-.topnav .icon {
+.topnav-t .icon {
   display: none;
 }
-.upload{
+/* .upload{
 	float: right !important;	
-}
+} */
 
 @media screen and (max-width: 600px) {
-  .topnav a:not(:first-child) {display: none;}
-  .topnav a.icon {
+  .topnav-t a:not(:first-child) {display: none;}
+  .topnav-t a.icon {
     float: right;
     display: block;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
+  .topnav-t.responsive {position: relative;}
+  .topnav-t.responsive .icon {
     position: absolute;
     right: 0;
     top: 0;
   }
-  .topnav.responsive a {
+  .topnav-t.responsive a {
     float: none;
     display: block;
     text-align: left;
-  }
-  .upload{
-	float: none;
-    display: block;
-    text-align: left;	
+   }
+
 }
+.w3view-cart{
+	background: #222;
+}
+.w3view-cart:hover{
+	background: #F44336 ;
 }
 </style>
 <!-- web-fonts --> 
@@ -117,10 +122,10 @@ $(document).ready(function() {
 
 function myFunction() {
   var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
+  if (x.className === "topnav-t") {
     x.className += " responsive";
   } else {
-    x.className = "topnav";
+    x.className = "topnav-t";
   }
 }
 
@@ -196,70 +201,26 @@ function myFunction() {
       <link href="{{asset("public_assets/css/app.css") }}" rel="stylesheet">
   </head>
   <body>
-      {{-- <div id="app">
-          <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-              <div class="container">
-                  <a class="navbar-brand" href="{{ url('/') }}">
-                      {{ config('app.name', 'Laravel') }}
-                  </a>
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                      <span class="navbar-toggler-icon"></span>
-                  </button>
-  
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                      <!-- Left Side Of Navbar -->
-                      <ul class="navbar-nav mr-auto">
-  
-                      </ul>
-  
-                      <!-- Right Side Of Navbar -->
-                      <ul class="navbar-nav ml-auto">
-                          <!-- Authentication Links -->
-                          @guest
-                              <li class="nav-item">
-                                  <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                              </li>
-                              @if (Route::has('register'))
-                                  <li class="nav-item">
-                                      <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                  </li>
-                              @endif
-                          @else
-                              <li class="nav-item dropdown">
-                                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                      {{ Auth::user()->name }}
-                                  </a>
-  
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                      <a class="dropdown-item" href="{{ route('logout') }}"
-                                         onclick="event.preventDefault();
-                                                       document.getElementById('logout-form').submit();">
-                                          {{ __('Logout') }}
-                                      </a>
-  
-                                      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                          @csrf
-                                      </form>
-                                  </div>
-                              </li>
-                          @endguest
-                      </ul>
-                  </div>
-              </div>
-          </nav>
-  
-          
-      </div> --}}
+     
 
-	  <div class="topnav header-sticky" id="myTopnav">
+	  <div class="topnav-t header-sticky" id="myTopnav">
 		
 		  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
 		  	<i class="fa fa-bars"></i>
 		  </a>
+		  <a href="{{url('/')}}" style="  background-color: #F44336;
+		  " >Home</a>
+		  <a href="{{url('/about_Us')}}"  >About Us</a>
+		  <a href="category/products/1" >Store</a>
+
+		  <a  href="{{url('/contact_Us')}}"> Contact Us</a>	
+					
+
+
+
 			<a class="upload" href="{{url('/upload_Item')}}">Upload Your Product Here</a>
 			@guest
-			<a style="  background-color: #F44336;
-			" class="nav-link"  href="{{ route('login') }}">{{ __('Login') }}</a>
+			<a class="nav-link"  href="{{ route('login') }}">{{ __('Login') }}</a>
 			@if (Route::has('register'))
 			<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
 			{{-- <a href="{{url('/')}}"  >Home</a> --}}
@@ -273,24 +234,22 @@ function myFunction() {
 		
 			{{-- <a id="navbarDropdown" style="color: white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 				{{ Auth::user()->name }} --}}
-				<a class="dropdown-item" href='/user/logout'
-				onclick="event.preventDefault();
-							  document.getElementById('logout-form').submit();">
-				 {{ __('Logout') }}
-			 </a>
+				
 		
-			<a class="dropdown-item" href="{{url('/Profile')}}">
+			<a  href="{{url('/Profile')}}">
 				My Profile
 				<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
 					@csrf
 				</form>
 			   </a>
+			   <a  href='/user/logout'
+				onclick="event.preventDefault();
+							  document.getElementById('logout-form').submit();">
+				 {{ __('Logout') }}
+			 </a>
 			
 			@endguest
-		<a href="{{url('/about_Us')}}"  >About Us</a>
-		<a href="category/products/1" >Store</a>
-		<a href="{{url('/')}}"  >Home</a>
-		<a href="{{url('/add-to-wishlist')}}">my favorite</a>
+
 
 		
 	   </div>
@@ -308,70 +267,31 @@ function myFunction() {
 						<button type="submit" class="btn btn-default" aria-label="Left Align">
 							<i class="fa fa-search" aria-hidden="true"> </i>
 						</button>
+						
 					</form>
-					{{-- {{$products->Links()}} --}}
-
+                    
 				</div>
 				<div class="header-cart"> 
-					<div class="my-account">
-						<a href="{{url('/contact_Us')}}"><i class="fa fa-map-marker" aria-hidden="true"></i> CONTACT US</a>						
-					</div>
+					
 					<div class="cart"> 
-						<form action="#" method="post" class="last"> 
-							<input type="hidden" name="cmd" value="_cart" />
-							<input type="hidden" name="display" value="1" />
-							<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-						</form>  
+							 
+							
+							<button  class="w3view-cart" type="submit" name="submit" value=""><a href="{{url('/add-to-wishlist')}}"><i class="fa fa-heart" aria-hidden="true"></i></a></button>
+						  
 					</div>
-					<div class="clearfix"> </div> 
+					 
 				</div> 
-				<div class="clearfix"> </div>
+				
 			</div>		
 		</div><!-- //header-two -->
 		
-	</div>
+	
 	<!-- //header -->
    
     @yield('content')
 
     <!-- footer-top -->
-	{{-- <div class="w3agile-ftr-top">
-		<div class="container">
-			<div class="ftr-toprow">
-				<div class="col-md-4 ftr-top-grids">
-					<div class="ftr-top-left">
-						<i class="fa fa-truck" aria-hidden="true"></i>
-					</div> 
-					<div class="ftr-top-right">
-						<h4>FREE DELIVERY</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus justo ac </p>
-					</div> 
-					<div class="clearfix"> </div>
-				</div> 
-				<div class="col-md-4 ftr-top-grids">
-					<div class="ftr-top-left">
-						<i class="fa fa-user" aria-hidden="true"></i>
-					</div> 
-					<div class="ftr-top-right">
-						<h4>CUSTOMER CARE</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus justo ac </p>
-					</div> 
-					<div class="clearfix"> </div>
-				</div>
-				<div class="col-md-4 ftr-top-grids">
-					<div class="ftr-top-left">
-						<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-					</div> 
-					<div class="ftr-top-right">
-						<h4>GOOD QUALITY</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus justo ac </p>
-					</div>
-					<div class="clearfix"> </div>
-				</div> 
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div> --}}
+
 	<!-- //footer-top --> 
 	<!-- subscribe -->
 	<div class="subscribe"> 
@@ -419,20 +339,18 @@ function myFunction() {
 					<div class="col-md-4 footer-grids">
 						<h3>Company</h3>
 						<ul>
-							<li><a href="about.html">About Us</a></li>
-							<li><a href="marketplace.html">Marketplace</a></li>  
-							<li><a href="values.html">Core Values</a></li>  
-							<li><a href="privacy.html">Privacy Policy</a></li>
+							<li><a href="{{url('/about_Us')}}">About Us</a></li>
+							<li><a href="{{url('/Profile')}}">My Profile</a></li>  
+							<li><a href="category/products/1">Store</a></li>
+							
 						</ul>
 					</div>
 					<div class="col-md-4 footer-grids">
 						<h3>Services</h3>
 						<ul>
-							<li><a href="contact.html">Contact Us</a></li>
-							<li><a href="login.html">Returns</a></li> 
-							<li><a href="faq.html">FAQ</a></li>
-							<li><a href="sitemap.html">Site Map</a></li>
-							<li><a href="login.html">Order Status</a></li>
+							<li><a href="{{url('/contact_Us')}}">Contact Us</a></li>
+							<li><a href="{{url('/add-to-wishlist')}}">My Favorite</a></li>
+							<li><a href="{{url('/upload_Item')}}">Upload Item</a></li>
 						</ul> 
 					</div>
 					{{-- <div class="col-md-4 footer-grids">
@@ -451,6 +369,7 @@ function myFunction() {
 			</div>
 		</div>
 	</div>
+	
 	<!-- //footer -->		
 	<div class="copy-right"> 
 		<div class="container">
@@ -459,7 +378,7 @@ function myFunction() {
 	</div> 
 	<!-- cart-js -->
 	<script src="{{asset("public_assets/js/minicart.js")}}"></script>
-	<script>
+	{{-- <script>
         w3ls.render();
 
         w3ls.cart.on('w3sb_checkout', function (evt) {
@@ -474,7 +393,7 @@ function myFunction() {
         		}
         	}
         });
-    </script>  
+    </script>   --}}
 	<!-- //cart-js -->	
 	<!-- countdown.js -->	
 	<script src="{{asset("public_assets/js/jquery.knob.js")}}"></script>

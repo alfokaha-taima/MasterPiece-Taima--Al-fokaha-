@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
+use App\City;
 class productController extends Controller
 {
     public function index(){
@@ -13,9 +14,12 @@ class productController extends Controller
         $products = $product->all();
         $category = new Category();
         $categories =  $category->all();
+        $city = new City();
+        $cities =  $city->all();
+        
         
 
-        return view('dashboard.Product', compact('products', 'categories'));
+        return view('dashboard.Product', compact('products', 'categories','users','cities'));
     }
 
 
@@ -82,7 +86,12 @@ class productController extends Controller
         $product->category_id = $req['category_id'];
         $product->image    = $imageName;
         $product->save();
-        return redirect('/Product');
+        $req->session()->flash('success','Approved Successfully');
+
+
+        
+        return redirect()->back();
+       
 
     }
 
@@ -96,6 +105,7 @@ class productController extends Controller
       $product=$productModel->find($id);
       $category = new Category();
       $categories =  $category->all();
+     
       return view('dashboard.editproduct',compact('product','categories'));
     }
     
@@ -128,7 +138,7 @@ class productController extends Controller
     public function destroy($id){
         $var=Product::find($id);
         $var->delete();
-        return back()->with('success', 'User deleted!');
+        return back()->with('success', 'Product deleted!');
     }
 
     public function addToWishlist(Request $request){

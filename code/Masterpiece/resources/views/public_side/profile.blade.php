@@ -655,6 +655,11 @@ select.form-control:not([size]):not([multiple]) {
          <div id="content" class="content content-full-width">
             <!-- begin profile -->
             <div class="profile">
+                @if(session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{session('success')}}
+                </div>
+                @endif
                <div class="profile-header">
                   <!-- BEGIN profile-header-cover -->
                   <div class="profile-header-cover"></div>
@@ -669,20 +674,15 @@ select.form-control:not([size]):not([multiple]) {
                      <!-- BEGIN profile-header-info -->
                      <div class="profile-header-info">
                         <h4 class="m-t-10 m-b-5">{{ Auth::user()->name}}</h4>
-                        <p class="m-b-10">{{  Auth::user()->email}}</p>
+                        <p class="m-b-10 color-white">{{  Auth::user()->email}}</p>
+                        <p class="m-b-10">{{  Auth::user()->mobile}}</p>
                         <a href="/edit/user" class="btn btn-sm btn-info mb-2">Edit Profile</a>
                      </div>
                      <!-- END profile-header-info -->
                   </div>
                   <!-- END profile-header-content -->
                   <!-- BEGIN profile-header-tab -->
-                  <ul class="profile-header-tab nav nav-tabs">
-                     <li class="nav-item"><a href="#profile-post" class="nav-link active show" data-toggle="tab">POSTS</a></li>
-                     <li class="nav-item"><a href="#profile-about" class="nav-link" data-toggle="tab">ABOUT</a></li>
-                     <li class="nav-item"><a href="#profile-photos" class="nav-link" data-toggle="tab">PHOTOS</a></li>
-                     <li class="nav-item"><a href="#profile-videos" class="nav-link" data-toggle="tab">VIDEOS</a></li>
-                     <li class="nav-item"><a href="#profile-friends" class="nav-link" data-toggle="tab">FRIENDS</a></li>
-                  </ul>
+                 
                   <!-- END profile-header-tab -->
                </div>
             </div>
@@ -720,7 +720,7 @@ select.form-control:not([size]):not([multiple]) {
                                 </p>
                              </div>
                              <td>
-                                <a class="btn-sm btn-warning" href="editproduct/{{$product['id']}}" role="button"> Edit </a>
+                                <a class="btn-sm btn-primary " style="margin: 10px" href="editproduct/{{$product['id']}}" role="button"> Edit </a>
                             </td> 
                             <td><a class="btn-sm btn-danger" href="deleteproduct/{{$product['id']}}" role="button">Delete</a></td> 
                             

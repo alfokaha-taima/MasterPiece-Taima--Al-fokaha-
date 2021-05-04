@@ -2,10 +2,25 @@
 
 @section('content')
 
+
 <!-- contact-page -->
 <div class="contact">
+   
     <div class="container"> 
+        @if(session('success'))
+        <div class="alert alert-success" role="alert">
+            {{session('success')}}
+        </div>
+        @endif
         <h3 class="w3ls-title w3ls-title1">Contact Us</h3>  
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+            <span>{{$error}}</span>
+            <br>
+            @endforeach
+        </div>
+        @endif
        
         <div class="contact-form-row">
             <div class="col-md-7 contact-left">
@@ -14,7 +29,7 @@
                     <input type="text" name="name" placeholder="Name" required="">
                     <input class="email" type="text" name="email" placeholder="Email" required="">
                     <textarea placeholder="Message" name="message" required=""></textarea>
-                    <input type="submit" value="SUBMIT">
+                    <input type="submit" >
                 </form>
             </div> 
             <div class="col-md-4 contact-right">

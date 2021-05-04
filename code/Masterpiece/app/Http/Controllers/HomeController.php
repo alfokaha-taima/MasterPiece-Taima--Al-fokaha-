@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
 use App\Value;
+use App\User;
+use App\City;
+
 
 
 class HomeController extends Controller
@@ -51,9 +54,13 @@ class HomeController extends Controller
             // $category= new Category();
             // $categories = $category->has("products")->get();
             // return view('home', compact('products', 'categories'));
-            $products=Product::where('category_id',$category_id->id)->where('approve','1')->paginate(10);
+            $products=Product::where('category_id',$category_id->id)->where('approve','1')->paginate(5);
             $categories= Category::has("products")->get();
-            return view('public_side.products',compact('categories','products'));
+            $user = new User();
+        $users =  $user->all();
+        $city = new City();
+        $cities =  $city->all();
+            return view('public_side.products',compact('categories','products','users','cities'));
 
             }
 

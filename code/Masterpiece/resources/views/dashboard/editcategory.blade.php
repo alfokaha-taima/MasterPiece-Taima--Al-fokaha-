@@ -1,45 +1,57 @@
 @extends('dashboard.layout')
 @section('content')
-<div class="pd-20 card-box mb-30">
-    <div class="clearfix">
-        <div class="pull-left">
-            <h4 class="text-blue h4">Update Data Category</h4>
-        </div>
-    </div>
-    <form action="/updatecategory/{{$category['id']}}" method="POST"  enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-        <div class="form-group row">
-            <label class="col-sm-12 col-md-2 col-form-label">Ctegory name</label>
-            <div class="col-sm-12 col-md-10">
-                <input class="form-control" type="text" placeholder="Johnny Brown" name="name" value="{{$category['name']}}">
-                @error('name')
-                    <small class='text-danger'>{{$message}}</small>
-                @enderror
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">Example Form</div>
+        <div class="card-body card-block">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                <span>{{$error}}</span>
+                <br>
+                @endforeach
             </div>
+            @endif
+            <form action="/updatecategory/{{$category['id']}}" method="post" class="" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                        </div>
+                        <input type="text" id="username" name="name" placeholder="Username" value="{{$category['name']}}" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                        </div>
+                        <input type="text" id="email" name="desc" placeholder="Email" value="{{$category['desc']}}" class="form-control">
+                    </div>
+                </div>
+              
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                        </div>
+                        <input type="file"  name="image" placeholder="upload your image" class="form-control">
+                    </div>
+                </div>
+                <div class="form-actions form-group">
+                    <button type="submit" class="btn btn-primary  btn-sm">Submit</button>
+                </div>
+                
+            </form>
         </div>
-        <div class="form-group row">
-            <label class="col-sm-12 col-md-2 col-form-label"> Category Descreption</label>
-            <div class="col-sm-12 col-md-10">
-                <input class="form-control" placeholder="descreption" type="text" name="desc" value="{{$category['desc']}}">
-                @error('desc')
-                    <small class='text-danger'>{{$message}}</small>
-                @enderror
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-12 col-md-2 col-form-label"> Category Descreption</label>
-            <div class="col-sm-12 col-md-10">
-                <input class="form-control" placeholder="descreption" type="file" name="image" >
-                @error('desc')
-                    <small class='text-danger'>{{$message}}</small>
-                @enderror
-            </div>
-        </div>
-   
-        <div class="btn-list">
-            <input class="btn btn-primary" type="submit" value="Update" name="submit">
-        </div>
-    </form>
+ 
 </div>
+
+
+   
+
+
+
+
+<!--table End -->
+
 @endsection
